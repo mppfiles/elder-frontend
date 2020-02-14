@@ -13,6 +13,7 @@
     "tests"
   ],
   "dependencies": {
+    "bootstrap": "^3.4.1",
     "fontawesome": "^5.12.1",
     "data-confirm-modal": "ifad/data-confirm-modal#^1.6.2",
     "jquery-view-engine": "mppfiles/jquery-view-engine"
