@@ -15,6 +15,7 @@
   "dependencies": {
     "fontawesome": "^5.12.1",
     "data-confirm-modal": "ifad/data-confirm-modal#^1.6.2",
-    "jquery-view-engine": "mppfiles/jquery-view-engine"
+    "jsrender": "^1.0.5",
+    "jsviews": "^1.0.5"
   }
 }
