@@ -17,6 +17,7 @@
     "fontawesome": "^5.12.1",
     "data-confirm-modal": "ifad/data-confirm-modal#^1.6.2",
     "jsrender": "^1.0.5",
-    "jsviews": "^1.0.5"
+    "jsviews": "^1.0.5",
+    "jovn": "JocaPC/jquery-view-engine"
   }
 }
