@@ -1,0 +1,20 @@
+{
+  "name": "elder-frontend",
+  "description": "A collection of traditional javascript libs",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fontawesome": "^5.12.1",
+    "data-confirm-modal": "ifad/data-confirm-modal#^1.6.2",
+    "jquery-view-engine": "mppfiles/jquery-view-engine"
+  }
+}
