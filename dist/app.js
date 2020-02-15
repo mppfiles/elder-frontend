@@ -10,21 +10,32 @@ var app = {
 
         self.base_url = opts.base_url;
         self.locale = opts.locale || "es",
-                self.ui.init();
+        self.ui.init();
         self.ajax.init();
-        $.trigger("App.initialized");
+        $.trigger("app.initialized");
     }
 };
 
 app.ui = {
     messages: {
-        loading: "Por favor espere"
+        loading: "Por favor espere",
+        confirm_title: 'Confirmar acción',
+        confirm_commit: 'Continuar',
+        confirm_cancel: 'Cancelar'
     },
 
     init: function () {
         bootbox.setDefaults({locale: app.locale, animate: false});
         $('[data-toggle="tooltip"]').tooltip(); //tooltips de bootstrap
         $('[data-toggle="popover"]').popover(); //popovers de bootstrap
+        
+        dataConfirmModal.setDefaults({
+            title: app.ui.messages.confirm_title,
+            commit: app.ui.messages.confirm_commit,
+            cancel: app.ui.messages.confirm_cancel,
+            fade:   false,
+            verifyClass: 'form-control'
+        });
     },
 
     recargarPantalla: function () {

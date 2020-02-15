@@ -1,23 +1,23 @@
 {
-  "name": "elder-frontend",
-  "description": "A collection of traditional javascript libs",
-  "main": "",
-  "license": "MIT",
-  "homepage": "",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "fontawesome": "^5.12.1",
-    "data-confirm-modal": "ifad/data-confirm-modal#^1.6.2",
-    "jsrender": "^1.0.5",
-    "jsviews": "^1.0.5",
-    "jovn": "JocaPC/jquery-view-engine",
-    "bootbox.js": "bootbox#^5.4.0"
-  }
+    "name": "elder-frontend",
+    "description": "A collection of traditional javascript libs",
+    "main": "",
+    "license": "MIT",
+    "homepage": "",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "bootbox.js": "bootbox#^5.4.0",
+        "fontawesome": "^5.12.1",
+        "data-confirm-modal": "ifad/data-confirm-modal#^1.6.2",
+        "jsviews": "^1.0.5",
+        "jovn": "JocaPC/jquery-view-engine",
+        "jquery-serialize-object": "macek/jquery-serialize-object#^2.5.0"
+    }
 }
