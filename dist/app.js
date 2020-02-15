@@ -12,7 +12,7 @@ var app = {
         self.locale = opts.locale || "es",
         self.ui.init();
         self.ajax.init();
-        $.trigger("app.initialized");
+        $(document).trigger("app.initialized");
     }
 };
 
