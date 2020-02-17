@@ -1,4 +1,4 @@
-/* global bootbox */
+/* global bootbox, dataConfirmModal */
 
 'use strict';
 var app = {
@@ -108,12 +108,12 @@ app.ajax = {
             bootbox.hideAll();
 
             if (xhr.status === 403) {
-                self.mensajeError(app.ajax.messages.access_denied_title, app.ajax.messages.access_denied);
+                self.ui.mensajeError(app.ajax.messages.access_denied_title, app.ajax.messages.access_denied);
                 return;
             }
 
             //error 500, o cualquier otro error.
-            self.mensajeError(app.ajax.messages.server_error_title, app.ajax.messages.server_error);
+            self.ui.mensajeError(app.ajax.messages.server_error_title, app.ajax.messages.server_error);
         });
     },
 
@@ -122,7 +122,7 @@ app.ajax = {
             data = JSON.parse(data);
         } catch (e) {
             console.log(e);
-            app.mensajeError(app.ajax.messages.error_parsing_response_title, app.ajax.messages.error_parsing_response);
+            app.ui.mensajeError(app.ajax.messages.error_parsing_response_title, app.ajax.messages.error_parsing_response);
             data = {"global": app.ajax.messages.error_parsing_response};
         }
 
