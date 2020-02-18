@@ -122,12 +122,12 @@ app.ajax = {
             bootbox.hideAll();
 
             if (xhr.status === 403) {
-                self.ui.mensajeError(app.ajax.messages.access_denied_title, app.ajax.messages.access_denied);
+                app.ui.mensajeError(app.ajax.messages.access_denied_title, app.ajax.messages.access_denied);
                 return;
             }
 
             //error 500, o cualquier otro error.
-            self.ui.mensajeError(app.ajax.messages.server_error_title, app.ajax.messages.server_error);
+            app.ui.mensajeError(app.ajax.messages.server_error_title, app.ajax.messages.server_error);
         });
     },
 
