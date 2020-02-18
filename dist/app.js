@@ -60,6 +60,20 @@ app.ui = {
         bootbox.dialog({closeButton: false, title: titulo, message: mensaje, buttons: {"OK": {className: 'btn-danger', callback: callbackOK}}});
     },
 
+    modalErrores: function (titulo, errores, callbackOK) {
+        this.mensajeError(titulo, this.getListaErrores(errores), callbackOK);
+    },
+    
+    getListaErrores: function (errores) {
+        var $ul = $("<ul class=\"errores\"></ul>");
+        for (let item in errores) {
+            var $li = $("<li></li>");
+            $li.text(errores[item]);
+            $ul.append($li);
+        }
+        return $ul;
+    },
+
     resetFormValidation: function ($form) {
         $form.removeClass("was-validated");
         $form.find(".is-invalid").removeClass("is-invalid");
@@ -117,15 +131,21 @@ app.ajax = {
         });
     },
 
-    getRespuesta: function (data) {
+    getRespuesta: function (xhr) {
+        var json;
+        
         try {
-            data = JSON.parse(data);
+            json = JSON.parse(xhr.responseText);
         } catch (e) {
             console.log(e);
             app.ui.mensajeError(app.ajax.messages.error_parsing_response_title, app.ajax.messages.error_parsing_response);
-            data = {"global": app.ajax.messages.error_parsing_response};
+            json = { global: app.ajax.messages.error_parsing_response };
         }
 
-        return data;
+        return json;
+    },
+    
+    getErrores: function(xhr) {
+        return this.getRespuesta(xhr) || { global: "Error desconocido" };
     }
 };
