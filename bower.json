@@ -16,8 +16,9 @@
     "bootstrap": "^3.4.1",
     "fontawesome": "^5.12.1",
     "data-confirm-modal": "ifad/data-confirm-modal#^1.6.2",
-    "jsrender": "^1.0.5",
     "jsviews": "^1.0.5",
-    "jovn": "JocaPC/jquery-view-engine"
+    "jovn": "JocaPC/jquery-view-engine",
+    "jquery-serialize-object": "macek/jquery-serialize-object#^2.5.0",
+    "bootbox.js": "bootbox#^4.0.0"
   }
 }
