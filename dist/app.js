@@ -7,9 +7,8 @@ var app = {
 
     init: function (opts) {
         var self = this;
-
         self.base_url = opts.base_url;
-        self.locale = opts.locale || "es",
+        self.locale = opts.locale || "es";
         self.ui.init();
         self.ajax.init();
         $(document).trigger("app.initialized");
@@ -28,12 +27,12 @@ app.ui = {
         bootbox.setDefaults({locale: app.locale, animate: false});
         $('[data-toggle="tooltip"]').tooltip(); //tooltips de bootstrap
         $('[data-toggle="popover"]').popover(); //popovers de bootstrap
-        
+
         dataConfirmModal.setDefaults({
             title: app.ui.messages.confirm_title,
             commit: app.ui.messages.confirm_commit,
             cancel: app.ui.messages.confirm_cancel,
-            fade:   false,
+            fade: false,
             verifyClass: 'form-control'
         });
     },
@@ -43,7 +42,7 @@ app.ui = {
     },
 
     mensajeCargando: function () {
-        bootbox.dialog({closeButton: false, message: "<p class='text-center lead'><i class='fas fa-lg fa-spinner fa-spin'> </i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + app.ui.messages.loading + "... </p>"});
+        bootbox.dialog({closeButton: false, message: "<p class='text-center lead'><i class='fa fa-lg fa-spinner fa-spin'> </i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + app.ui.messages.loading + "... </p>"});
     },
 
     mensaje: function (titulo, mensaje, callbackOK) {
@@ -60,31 +59,44 @@ app.ui = {
         bootbox.dialog({closeButton: false, title: titulo, message: mensaje, buttons: {"OK": {className: 'btn-danger', callback: callbackOK}}});
     },
 
+    modalErrores: function (titulo, errores, callbackOK) {
+        this.mensajeError(titulo, this.getListaErrores(errores), callbackOK);
+    },
+    
+    getListaErrores: function (errores) {
+        var $ul = $("<ul class=\"errores\"></ul>");
+        for (let item in errores) {
+            var $li = $("<li></li>");
+            $li.text(errores[item]);
+            $ul.append($li);
+        }
+        return $ul;
+    },
+    
     resetFormValidation: function ($form) {
         $form
-                .find(".has-error").removeClass("has-error").end();  //despinto form, no quito lista de errores para evitar FOUC
+            .find(".has-error").removeClass("has-error").end(); //despinto form, no quito lista de errores para evitar FOUC
     },
-
+    
     fillFormErrors: function ($form, data) {
         var self = this;
-
+        
         // pinto form de rojo
         $.each(data, function (key, value) {
             $form.find(".campo." + key).addClass("has-error");
         });
-
+        
         //muestro lista de errores dentro del form
         var $lista = self.getListaErrores(data);
         $lista.addClass("alert alert-danger");
-
         $form.find("div.errores").html($lista);
-
+        
         // muestro error global aparte
         if (data.global !== undefined) {
             self.mensajeError("Error", data.global);
         }
     }
-};
+}
 
 app.ajax = {
     messages: {
@@ -95,10 +107,8 @@ app.ajax = {
         server_error_title: "Error del servidor",
         server_error: "Ha ocurrido un error. Por favor, contacte al &aacute;rea t&eacute;cnica."
     },
-
+    
     init: function () {
-        var self = this;
-
         $(document).ajaxError(function (event, xhr, settings, exception) {
             if (exception === 'timeout') {
                 alert("Timeout");
@@ -110,26 +120,31 @@ app.ajax = {
             }
 
             bootbox.hideAll();
-
             if (xhr.status === 403) {
-                self.ui.mensajeError(app.ajax.messages.access_denied_title, app.ajax.messages.access_denied);
+                app.ui.mensajeError(app.ajax.messages.access_denied_title, app.ajax.messages.access_denied);
                 return;
             }
-
             //error 500, o cualquier otro error.
-            self.ui.mensajeError(app.ajax.messages.server_error_title, app.ajax.messages.server_error);
+            app.ui.mensajeError(app.ajax.messages.server_error_title, app.ajax.messages.server_error);
         });
     },
-
-    getRespuesta: function (data) {
+    
+    getRespuesta: function (xhr) {
+        var json;
+        
         try {
-            data = JSON.parse(data);
+            json = JSON.parse(xhr.responseText);
         } catch (e) {
             console.log(e);
             app.ui.mensajeError(app.ajax.messages.error_parsing_response_title, app.ajax.messages.error_parsing_response);
-            data = {"global": app.ajax.messages.error_parsing_response};
+            json = { global: app.ajax.messages.error_parsing_response };
         }
 
-        return data;
+        return json;
+    },
+    
+    getErrores: function(xhr) {
+        return this.getRespuesta(xhr) || { global: "Error desconocido" };
     }
 };
+
