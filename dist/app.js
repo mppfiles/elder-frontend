@@ -143,9 +143,5 @@ app.ajax = {
         }
 
         return json;
-    },
-    
-    getErrores: function(xhr) {
-        return this.getRespuesta(xhr) || { global: "Error desconocido" };
     }
 };
