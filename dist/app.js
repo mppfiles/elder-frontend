@@ -42,7 +42,7 @@ app.ui = {
     },
 
     mensajeCargando: function () {
-        bootbox.dialog({closeButton: false, message: "<p class='text-center lead'><i class='fa fa-lg fa-spinner fa-spin'> </i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + app.ui.messages.loading + "... </p>"});
+        bootbox.dialog({closeButton: false, message: "<p class='text-center lead'><i class='fas fa-lg fa-spinner fa-spin'> </i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + app.ui.messages.loading + "... </p>"});
     },
 
     mensaje: function (titulo, mensaje, callbackOK) {
