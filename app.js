@@ -33,6 +33,7 @@ app.ui = {
             title: app.ui.messages.confirm_title,
             commit: app.ui.messages.confirm_commit,
             cancel: app.ui.messages.confirm_cancel,
+            cancelClass: 'btn-link',
             fade:   false,
             verifyClass: 'form-control'
         });
@@ -50,7 +51,7 @@ app.ui = {
         if (callbackOK === undefined) {
             callbackOK = $.noop;
         }
-        bootbox.dialog({closeButton: false, title: titulo, message: mensaje, buttons: {"OK": {className: 'btn-default', callback: callbackOK}}});
+        bootbox.dialog({closeButton: false, title: titulo, message: mensaje, buttons: {"OK": {className: 'btn-secondary', callback: callbackOK}}});
     },
 
     mensajeError: function (titulo, mensaje, callbackOK) {
@@ -145,3 +146,4 @@ app.ajax = {
         return json;
     }
 };
+
