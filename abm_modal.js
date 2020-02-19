@@ -50,9 +50,9 @@ $(function () {
         if (xhr.status !== 400) {
             return;
         }
-        
+
         app.ui.resetFormValidation($(this));
-        app.ui.fillFormErrors($(this), app.ajax.getErrores(xhr));
+        app.ui.fillFormErrors($(this), app.ajax.getRespuesta(xhr));
     });
 
     $modales_form.on('ajax:complete', function (event, data, status, xhr) {
