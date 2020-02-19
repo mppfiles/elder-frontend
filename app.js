@@ -9,7 +9,7 @@ var app = {
         var self = this;
 
         self.base_url = opts.base_url;
-        self.locale = opts.locale || "es",
+        self.locale = opts.locale || "es";
         self.ui.init();
         self.ajax.init();
         $(document).trigger("app.initialized");
