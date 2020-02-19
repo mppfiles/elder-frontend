@@ -10,22 +10,23 @@ $(function () {
         var $trigger = $(event.relatedTarget); // Button that triggered the modal
         var $modal = $(this);
         var $form = $modal.find("form");
+        var model = $trigger.data();
 
         $modal.find('.modal-title').text($trigger.data("title")); //completo el titulo
         $form[0].reset();  //limpio el form
         $form.attr("action", $form.data("action"));  //restauro la action original
-        var accionAbm = $trigger.data("accionAbm");
+        var accionAbm = model.accionAbm;
 
         switch (accionAbm) {
+            case "nueva":
+            case "nuevo":
             case "alta":    //OK
                 $form.attr("action", $form.data("action") + "/" + accionAbm); // =>  /alta
                 break;
+            case "editar":
             case "modificar":
-                $form.find(':input').val(function () {  //relleno form con dataset
-                    return $trigger[0].dataset[this.id];
-                });
-
-                $form.attr("action", $form.data("action") + "/" + accionAbm + "/" + $trigger[0].dataset.id);  // => /modificar/15
+                $form.view(model);    //relleno form con model
+                $form.attr("action", $form.data("action") + "/" + accionAbm + "/" + model.id);  // => /modificar/15
                 break;
             default:
                 app.ui.mensajeError("Error", "Acción de formulario no definida.");
@@ -38,7 +39,6 @@ $(function () {
     });
 
     $modales_form.on('ajax:before', function (event) {
-        app.ui.resetFormValidation($(this));
         //$form.find('.spinner').show()
     });
 
@@ -51,7 +51,8 @@ $(function () {
             return;
         }
         
-        app.ui.fillFormErrors($(this), app.ajax.getRespuesta(xhr));
+        app.ui.resetFormValidation($(this));
+        app.ui.fillFormErrors($(this), app.ajax.getErrores(xhr));
     });
 
     $modales_form.on('ajax:complete', function (event, data, status, xhr) {
