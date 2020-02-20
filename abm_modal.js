@@ -14,6 +14,7 @@ $(function () {
 
         $modal.find('.modal-title').text($trigger.data("title")); //completo el titulo
         $form[0].reset();  //limpio el form
+        app.ui.resetFormValidation($form);
         $form.attr("action", $form.data("action"));  //restauro la action original
         var accionAbm = model.accionAbm;
 
