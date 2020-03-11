@@ -122,7 +122,7 @@ app.ajax = {
 
             bootbox.hideAll();
 
-            if (xhr.status === 403 || xhr.responseText.toLowerCase().includes("login")) {
+            if (xhr.status === 403) {
                 app.ui.mensajeError(app.ajax.messages.access_denied_title, app.ajax.messages.access_denied);
                 return;
             }
