@@ -104,7 +104,9 @@ app.ajax = {
         error_parsing_response_title: "Error de la aplicación",
         error_parsing_response: "No se pudo procesar la respuesta del servidor. Por favor, contacte al área técnica.",
         server_error_title: "Error del servidor",
-        server_error: "Ha ocurrido un error. Por favor, contacte al &aacute;rea t&eacute;cnica."
+        server_error: "Ha ocurrido un error. Por favor, contacte al &aacute;rea t&eacute;cnica.",
+        conflict_error_title: "No se puede continuar",
+        conflict_error: "Ha ocurrido un error. Por favor, contacte al &aacute;rea t&eacute;cnica."
     },
 
     init: function () {
@@ -124,6 +126,11 @@ app.ajax = {
 
             if (xhr.status === 403) {
                 app.ui.mensajeError(app.ajax.messages.access_denied_title, app.ajax.messages.access_denied);
+                return;
+            }
+            
+            if (xhr.status === 409) {       //CONFLICT: se espera un json con una propiedad "mensaje"
+                app.ui.mensajeError(app.ajax.messages.conflict_error_title, xhr.responseJSON.mensaje || app.ajax.messages.conflict_error);
                 return;
             }
 
